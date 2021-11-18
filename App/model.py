@@ -285,3 +285,7 @@ def compareroutes(route1, route2):
         return 1
     else:
         return -1
+
+def acc(graph):
+    a = scc.KosarajuSCC(graph)
+    return scc.connectedComponents(a)

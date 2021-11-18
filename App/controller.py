@@ -134,3 +134,6 @@ def servedRoutes(analyzer):
     """
     maxvert, maxdeg = model.servedRoutes(analyzer)
     return maxvert, maxdeg
+
+def acc(graph):
+    return model.acc(graph)

@@ -28,6 +28,7 @@
 import sys
 import config
 import threading
+import time
 from App import controller
 from DISClib.ADT import stack
 assert config
@@ -44,7 +45,7 @@ operación seleccionada.
 # ___________________________________________________
 
 
-servicefile = 'bus_routes_14000.csv'
+servicefile = 'bus_routes_50.csv'
 initialStation = None
 
 # ___________________________________________________
@@ -63,6 +64,7 @@ def printMenu():
     print("5- Hay camino entre estacion base y estación: ")
     print("6- Ruta de costo mínimo desde la estación base y estación: ")
     print("7- Estación que sirve a mas rutas: ")
+    print("8- Conocer el numero de elementos conectados: ")
     print("0- Salir")
     print("*******************************************")
 
@@ -133,20 +135,32 @@ def thread_cycle():
             optionThree(cont)
 
         elif int(inputs[0]) == 4:
-            msg = "Estación Base: BusStopCode-ServiceNo (Ej: 75009-10): "
-            initialStation = input(msg)
+            #msg = "Estación Base: BusStopCode-ServiceNo (Ej: 75009-10): "
+            #initialStation = input(msg)
+            initialStation = "75009-10"
+            start_time = time.process_time()
             optionFour(cont, initialStation)
+            stop_time = time.process_time()
+            print((stop_time - start_time)*1000)
 
         elif int(inputs[0]) == 5:
             destStation = input("Estación destino (Ej: 15151-10): ")
             optionFive(cont, destStation)
 
         elif int(inputs[0]) == 6:
-            destStation = input("Estación destino (Ej: 15151-10): ")
+            #destStation = input("Estación destino (Ej: 15151-10): ")
+            destStation = "15151-10"
+            start_time = time.process_time()
             optionSix(cont, destStation)
+            stop_time = time.process_time()
+            print((stop_time - start_time)*1000)
 
         elif int(inputs[0]) == 7:
             optionSeven(cont)
+
+        elif int(inputs[0]) == 8:
+            a =controller.acc(cont['connections'])
+            print('Elementos conectados'+str(a))
 
         else:
             sys.exit(0)
